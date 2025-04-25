@@ -10,6 +10,8 @@ interface Task {
   completed: boolean;
   createdAt: Date;
 }
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
+console.log("serverURL", serverURL);
 
 export default function NotesApp() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,7 +19,7 @@ export default function NotesApp() {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:4000");
+    const newSocket = io(serverURL);
     setSocket(newSocket);
     newSocket.on("tasks", (updatedTasks: Task[]) => {
       setTasks(updatedTasks);
@@ -31,7 +33,7 @@ export default function NotesApp() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/tasks/fetchAllTasks"); 
+        const response = await fetch(`${serverURL}/api/tasks/fetchAllTasks`);
         const data = await response.json();
         setTasks(data);
       } catch (error) {
