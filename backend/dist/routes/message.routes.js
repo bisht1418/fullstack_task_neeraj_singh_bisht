@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const message_controller_1 = require("../controllers/message.controller");
+const task_service_1 = require("../services/task.service");
+const router = (0, express_1.Router)();
+const taskService = new task_service_1.TaskService();
+const taskController = new message_controller_1.TaskController(taskService);
+router.get('/fetchAllTasks', taskController.fetchAllTasks);
+exports.default = router;
