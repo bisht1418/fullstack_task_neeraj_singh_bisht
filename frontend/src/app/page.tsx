@@ -10,8 +10,8 @@ interface Task {
   completed: boolean;
   createdAt: Date;
 }
-const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
-console.log("serverURL", serverURL);
+
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL ?? "http://localhost:4000";
 
 export default function NotesApp() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -21,6 +21,7 @@ export default function NotesApp() {
   useEffect(() => {
     const newSocket = io(serverURL);
     setSocket(newSocket);
+
     newSocket.on("tasks", (updatedTasks: Task[]) => {
       setTasks(updatedTasks);
     });
