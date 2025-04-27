@@ -3,15 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const http_1 = require("http");
-const socket_io_1 = require("socket.io");
 const cors_1 = __importDefault(require("cors"));
-const environment_1 = require("./config/environment");
+const express_1 = __importDefault(require("express"));
+const socket_io_1 = require("socket.io");
+const http_1 = require("http");
 const mongoose_1 = require("./db/mongoose");
+const message_routes_1 = __importDefault(require("./routes/message.routes"));
+const environment_1 = require("./config/environment");
 const task_service_1 = require("./services/task.service");
 const socketHandler_1 = require("./services/socketHandler");
-const message_routes_1 = __importDefault(require("./routes/message.routes"));
 async function startServer() {
     try {
         await (0, mongoose_1.connect)();

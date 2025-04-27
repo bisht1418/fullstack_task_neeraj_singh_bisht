@@ -20,24 +20,6 @@ class SocketHandler {
                     console.error('Error adding task:', error);
                 }
             });
-            socket.on('toggle', async (taskId) => {
-                try {
-                    await this.taskService.toggleTask(taskId);
-                    this.io.emit('tasks', await this.taskService.getAllTasks());
-                }
-                catch (error) {
-                    console.error('Error toggling task:', error);
-                }
-            });
-            socket.on('delete', async (taskId) => {
-                try {
-                    await this.taskService.deleteTask(taskId);
-                    this.io.emit('tasks', await this.taskService.getAllTasks());
-                }
-                catch (error) {
-                    console.error('Error deleting task:', error);
-                }
-            });
             socket.on('disconnect', () => {
                 console.log('Client disconnected', socket.id);
             });

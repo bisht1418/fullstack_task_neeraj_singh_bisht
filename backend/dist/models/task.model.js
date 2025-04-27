@@ -35,18 +35,15 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toTaskDocument = exports.toTask = exports.TaskModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-// Mongoose schema
 const TaskSchema = new mongoose_1.Schema({
-    customId: { type: String, required: true, unique: true }, // renamed from id
+    customId: { type: String, required: true, unique: true },
     text: { type: String, required: true },
     completed: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now }
 }, {
     timestamps: true
 });
-// Create and export the model
 exports.TaskModel = mongoose_1.default.model('Task', TaskSchema, 'assignment_neeraj');
-// Helper to convert between the two interfaces
 const toTask = (doc) => {
     return {
         id: doc.customId,
